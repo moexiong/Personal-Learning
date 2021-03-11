@@ -3,10 +3,28 @@ package designer.simplefactory;
 import java.math.BigDecimal;
 
 /**
- * 简单工厂模式
+ * @author: Shixiong Zhan
+ * @date: 2021/2/28 13:37
+ * @description: 简单工厂模式的主要角色如下：
+ * 简单工厂（SimpleFactory）：是简单工厂模式的核心，负责实现创建所有实例的内部逻辑。工厂类的创建产品类的方法可以被外界直接调用，创建所需的产品对象。
+ * 抽象产品（Product）：是简单工厂创建的所有对象的父类，负责描述所有实例共有的公共接口。
+ * 具体产品（ConcreteProduct）：是简单工厂模式的创建目标。
  */
-public class SimpleFactory {
+public class SimpleFactoryMode {
 
+    public static void main(String[] args) {
+        // 简单工厂就是你要啥，我给啥就行，不需要关心细节
+        Operator operator = OperatorFactory.getOperator(OperatorFactory.OperatorType.ADD);
+        double result = operator.getResult(1.1, 2.2);
+        System.out.println(result);
+    }
+
+}
+
+/**
+ * 简单工厂（SimpleFactory）
+ */
+class OperatorFactory {
     enum OperatorType {
         ADD,
         SUB,
@@ -29,23 +47,18 @@ public class SimpleFactory {
         }
         throw new IllegalArgumentException();
     }
-
-    public static void main(String[] args) {
-        // 简单工厂就是你要啥，我给啥就行，不需要关心细节
-        Operator operator = SimpleFactory.getOperator(OperatorType.ADD);
-        double result = operator.getResult(1.1, 2.2);
-        System.out.println(result);
-    }
-
 }
+
 /**
- * 这里都放在一起，方便阅读
- * 接口，利用接口的多态性，实现多个不同的行为
+ * 抽象产品（Product）
  */
 interface Operator {
     double getResult(double a, double b);
 }
 
+/**
+ * 具体产品（ConcreteProduct）
+ */
 class Add implements Operator {
     @Override
     public double getResult(double a, double b) {
