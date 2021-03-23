@@ -1,8 +1,6 @@
 package algorithms.normal;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author: 詹世雄
@@ -22,7 +20,7 @@ import java.util.List;
  */
 public class Problem341 implements Iterator<Integer> {
 
-    private transient List<Integer> values = new ArrayList<>();
+    private transient Deque<Integer> values = new LinkedList<>();
     private transient Integer idx = -1;
 
     Problem341(List<NestedInteger> nestedList) {
@@ -32,7 +30,7 @@ public class Problem341 implements Iterator<Integer> {
     private void dfs(List<NestedInteger> nestedIntegers) {
         for (NestedInteger nestedInteger : nestedIntegers) {
             if (nestedInteger.isInteger()) {
-                values.add(nestedInteger.getInteger());
+                values.offerLast(nestedInteger.getInteger());
             } else {
                 dfs(nestedInteger.getList());
             }
@@ -41,12 +39,12 @@ public class Problem341 implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        return ++idx <= values.size() - 1;
+        return values.size() > 0;
     }
 
     @Override
     public Integer next() {
-        return values.get(idx);
+        return values.pollFirst();
     }
 }
 interface NestedInteger {
