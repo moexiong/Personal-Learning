@@ -107,4 +107,17 @@ class ListNode {
     ListNode(int x) {
         this.val = x;
     }
+
+    ListNode(int x, ListNode next) {
+        this.val = x;
+        this.next = next;
+    }
+
+    @Override
+    public String toString() {
+        return "ListNode{" +
+                "val=" + val +
+                ", next=" + next +
+                '}';
+    }
 }
