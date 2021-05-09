@@ -13,7 +13,7 @@
     </modules>
 
     <properties>
-        <com.google.guava>25.1-jre</com.google.guava>
+        <com.google.guava>29.0-jre</com.google.guava>
         <junit>4.13.1</junit>
     </properties>
 
